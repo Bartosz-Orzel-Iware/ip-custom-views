@@ -1,0 +1,46 @@
+<!-- Delegate Header -->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+<script>
+    const basketIcon = `<div class="navicon"><ion-icon size="large" name="cart-outline" role="img" class="md icon-large hydrated"></ion-icon></div>`
+    const userIcon = `<div class="navicon"><ion-icon size="large" name="person-outline" role="img" class="md icon-large hydrated"></ion-icon></div>`
+    const commentIcon = `<div class="navicon"><ion-icon size="large" name="chatbox-outline" role="img" class="md icon-large hydrated"></ion-icon></div>`
+
+    const mediaQuery = window.matchMedia('(min-width: 767px)');
+    mediaQuery.addEventListener('change', handleWidthChange);
+
+    const headerInterval = setInterval(()=> {
+        if ($('.cartIconSvg').length > 0) {
+            clearInterval(headerInterval)
+            handleWidthChange(mediaQuery);
+        }
+    },100)
+
+    function handleWidthChange(e) {
+        if (e.matches) {
+            desktopHeaderBuilder()
+        }
+    }
+    function desktopHeaderBuilder() {
+        if ($('.navlinkleft').length == 0) $('#navbarsExample07XL').before('<div class="navlinkleft"><div class="navlinknumber"><strong>+48 123123123</strong>  8:00-16:00 Mo-Fr</div></div>')
+        if ($('.language-versions').length == 0 ) { $('#navbarsExample07XL').before(`
+        <div class="language-versions">
+            <p><strong>Choose language:</strong></p>
+            <a href="#"><img src="https://masterprint-24.pl/useruploads/images/masterprint-24_pl/gallery_6810cf0a90328.png?1745932051" class="language-version"></a>
+            <a href="#"><img src="https://masterprint-24.pl/useruploads/images/masterprint-24_pl/gallery_6810cf0a8faf2.png?1745932051" class="language-version"></a>
+            <a href="#"><img src="https://masterprint-24.pl/useruploads/images/masterprint-24_pl/gallery_6810cf0a8cb0d.png?1745932051" class="language-version"></a>
+        </div>`)
+        }
+        $('header-cart').parent().before($('#navbarsExample07XL .navbar-nav.custom-navbar.lighter'))
+        $('.ip-login-register-btn-group a').html('<button class="ip-btn-outlined-border-secondary">Login/register</button>')
+        $('.cartIconSvg').remove()
+        if ($('.printing-house-btn').length == 0) $('.desktopLogo').after('<li class="nav-item"><a href="/"><button class="ip-btn-outlined-border-secondary printing-house-btn">Printing house</button></a></li>')
+        if ($('[name="cart-outline"]').length === 0) $('.cart-btn').prepend(basketIcon)
+        $('.ip-user-panel-btn-group a').html(userIcon)
+        $('.fa-comment').remove()
+        if ($('[name="chatbox-outline]').length == 0) $('.notifications-and-comments a').prepend(commentIcon)
+    }
+</script>
+
+<!-- End delegate Header -->
